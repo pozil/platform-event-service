@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event sent to the Platform Event Service in order to subscribe to a platform event">
+    <aura:attribute name="eventName" type="String" required="true" description="Plaform event API name"/>
+</aura:event>

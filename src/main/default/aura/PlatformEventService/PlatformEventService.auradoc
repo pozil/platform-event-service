@@ -1,0 +1,71 @@
+<aura:documentation>
+	<aura:description>
+		<p>This is a generic and reusable Lightning component that allows to publish and subscribe to platform events.
+		This is a service component so it has no user interface of it's own: it is meant to be called by other components.</p>
+		
+		<br/>
+		<p>WARNING: there must always be only one instance of this component on a given Lightning page.
+		If there is more than one, there will be errors and inconsistent behavior due to the behavior.
+		This constraint is imposed by the use of the CometD library.</p>
+		<br/>
+
+		<p>The component can be used in two ways: in a parent component's markup or as a standalone Lightning component in the App Builder.</p>
+		<p>The 'markup' approach has the advantage of providing callback functions that allow to capture errors with custom handlers.</p>
+		<p>The 'App Builder' approach has the advantage of enforcing the use of a single shared service instance per Lightning page.</p>
+
+		<br/>
+		<h4>1) Using the service in a component's markup</h4>
+		<p>Start by adding the service in the markup:</p>
+		<pre>&lt;c:PlatformEventService aura:id="peService"/&gt;</pre>
+
+		<p>Then, use the component's <code>publish</code> and <code>subscribe</code> Aura methods to publish and subscribe to platform events:</p>
+<pre>
+const pes = component.find('peService');
+pes.publish(eventName, eventData, errors => {
+	if (errors) {
+		// Optional error handler here (already covered by call to server)
+	} else {
+		// Notify success
+	}
+});
+</pre>
+
+		<br/>
+		<h4>2) Using the service as a standalone Lightning component in the App Builder</h4>
+		
+		<p>Drag and drop the platform event service component in a Lightning page using the Lightning App Builder. Notice that the component is 'invisible' (there is a blank space where the component should be), that is normal.</p>
+		
+		<p>You then have two complementary ways of interacting with the platform event service:</p>
+		<ul>
+			<li>Static mode: select the component in the App Builder and enter a list of hard-coded platform event names seperated by commas. These will be susbcribed to when the page loads.</li>
+			<li>Dynamic mode: fire or handle the following Application events:<br/>
+				<table>
+					<tr>
+						<th>Event name</th>
+						<th>Fired by</th>
+						<th>Handled by</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>PlatformEventSubscription</td>
+						<td>You</td>
+						<td>Platform Event Service</td>
+						<td>Event sent to the Platform Event Service in order to subscribe to a platform event</td>
+					</tr>
+					<tr>
+						<td>IncomingPlatformEvent</td>
+						<td>Platform Event Service</td>
+						<td>You</td>
+						<td>Event sent by the Platform Event Service when receiving a platform event</td>
+					</tr>
+					<tr>
+						<td>OutgoingPlatformEvent</td>
+						<td>You</td>
+						<td>Platform Event Service</td>
+						<td>Event sent to the Platform Event Service in order to publish a platform event</td>
+					</tr>
+				</table>
+			</li>
+		</ul>
+	</aura:description>
+</aura:documentation>

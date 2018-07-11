@@ -1,0 +1,3 @@
+<design:component >
+	<design:attribute name="eventNames" label="Event Names" description="Comma seperated list of platform events that will be subscribed to at startup."/>
+</design:component>

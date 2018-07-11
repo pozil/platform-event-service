@@ -1,0 +1,30 @@
+<aura:component access="global" implements="flexipage:availableForAllPageTypes" controller="PlatformEventServiceController">
+    <ltng:require scripts="{!$Resource.cometd}" afterScriptsLoaded="{!c.onCometdScriptLoaded}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    <aura:handler event="aura:locationChange" action="{!c.onLocationChange}"/>
+    <aura:handler event="c:OutgoingPlatformEvent" action="{!c.onPublishEvent}"/>
+    <aura:handler event="c:PlatformEventSubscription" action="{!c.onSubscribeEvent}"/>
+    <aura:registerEvent name="incomingPlatformEvent" type="c:IncomingPlatformEvent"/>
+
+    <aura:attribute access="private" name="sessionId" type="String"/>
+    <aura:attribute access="private" name="cometd" type="Map"/>
+    <aura:attribute access="private" name="subscriptions" type="List"/>
+    <aura:attribute access="private" name="canSubscribe" type="Boolean" default="false"/>
+    <aura:attribute access="private" name="subscriptionQueue" type="List" default="[]"/>
+    
+    <aura:attribute access="global" name="eventNames" type="String" default="" description="Comma seperated list of platform events that will be subscribed to at startup."/>
+
+    <c:ServerActionService aura:id="server"/>
+
+    <aura:method access="global" name="publish" action="{!c.onPublishMethod}" description="Publishes a platform event">
+        <aura:attribute name="eventName" type="String" required="true" description="Platform event API name"/>
+        <aura:attribute name="data" type="Map" required="true" description="Platform event data"/>
+        <aura:attribute name="callback" type="Function" description="Callback function that returns either null if operation succeeded or a list of errors if operation failed"/>
+    </aura:method>
+
+    <aura:method access="global" name="subscribe" action="{!c.onSubscribeMethod}" description="Subscribes to a platform event">
+        <aura:attribute name="eventName" type="String" required="true" description="Platform event API name"/>
+        <aura:attribute name="callback" type="Function" description="Callback function that returns a boolean that indicates whether operation succeeded"/>
+    </aura:method>
+</aura:component>

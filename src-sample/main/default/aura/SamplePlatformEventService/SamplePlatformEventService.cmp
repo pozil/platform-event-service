@@ -1,0 +1,44 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+    <aura:attribute access="private" type="String" name="pubEventName" default="Sample__e"/>
+    <aura:attribute access="private" type="String" name="pubEventData"/>
+
+    <aura:attribute access="private" type="String" name="subEventName" default=""/>
+    <aura:attribute access="private" type="String" name="subEventData" default=""/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    <aura:handler event="c:IncomingPlatformEvent" action="{!c.onIncomingEvent}"/>
+
+    <c:PlatformEventService aura:id="peService"/>
+
+    <lightning:card title="Platform Event Playground">
+        <div class="slds-p-horizontal_medium">
+            <lightning:layout pullToBoundary="small">
+                
+                <!-- Publish -->
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small" class="slds-border_right">
+                    <div class="slds-text-title_caps slds-m-bottom_small">Publish</div>    
+                    <div class="slds-form slds-form_stacked">
+                        <lightning:input name="pubEventName" required="true" value="{!v.pubEventName}" label="Platform Event Name"/>
+                        <lightning:helptext content="JSON must use double quotes for keys and values." class="slds-float_right slds-m-top_small"/>
+                        <lightning:textarea name="pubEventData" label="Platform event data as JSON" value="{!v.pubEventData}" class="slds-m-top_small"/>
+                    </div>
+                    <div class="slds-align_absolute-center slds-m-top_small">
+                        <lightning:button variant="brand" label="Publish" onclick="{!c.onPublish}" disabled="{!empty(v.pubEventName)}"/>
+                    </div>
+                </lightning:layoutItem>
+
+                <!-- Subscribe -->
+                <lightning:layoutItem size="6" flexibility="auto" padding="around-small">
+                    <div class="slds-text-title_caps slds-m-bottom_small">Subscribe</div>
+                    <lightning:input name="subEventName" required="true" value="{!v.subEventName}" label="Platform Event Name"/>
+                    <div class="slds-align_absolute-center slds-m-top_small">
+                        <lightning:button variant="brand" label="Subscribe" onclick="{!c.onSubscribe}" disabled="{!empty(v.subEventName)}"/>    
+                    </div>
+                    <lightning:dynamicIcon type="eq" option="play" alternativeText="Listening to events" class="slds-float_right slds-m-top_medium"/>
+                    <lightning:textarea name="subEventData" label="Received platform events" value="{!v.subEventData}" disabled="true" class="slds-m-top_medium"/>
+                </lightning:layoutItem>
+            
+            </lightning:layout>
+        </div>
+    </lightning:card>
+</aura:component>
