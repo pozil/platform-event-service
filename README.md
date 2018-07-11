@@ -11,6 +11,10 @@ The component provides the following features:
 - subscribe and publish any platform event
 - two deployment modes: as a standalone Lightning component in the App Builder or integrated in markup
 
+<div align="center">
+    <img src="gfx/sample-app.png" alt="Sample app screenshot"/>
+</div>
+
 ## Documentation
 The component is documented using Aura documentation.<br/>
 You can access it from this URL (replace the domain):<br/>
@@ -97,7 +101,3 @@ The default installation installs the component and a sample application availab
 https://<b>&lt;YOUR_DOMAIN&gt;</b>.lightning.force.com/c/SamplePlatformEventApp.app
 
 If you wish to install the project without the sample application, edit `sfdx-project.json` and remove the `src-sample` path.
-
-<div align="center">
-    <img src="gfx/sample-app.png" alt="Sample app screenshot"/>
-</div>
