@@ -7,10 +7,8 @@ public abstract class PlatformEventServiceController {
     @AuraEnabled
     public static void publish(String eventName, String data) {
         // Load event type
-        Type platformEventType;
-        try {
-            platformEventType = Type.forName(eventName);
-        } catch (Exception e) {
+        Type platformEventType = Type.forName(eventName);
+        if (platformEventType == null) {
             throw new AuraHandledException('Unknown platform event type: '+ eventName);
         }
         // Create event instance
