@@ -1,7 +1,8 @@
-# Salesforce Lightning Platform Event Service Component (Deprecated)
+# Salesforce Lightning Platform Event Service Component (Partialy Deprecated)
 
-**WARNING:** this component is deprectated.<br/>
+**WARNING:** this component is partialy deprectated.<br/>
 It is replaced by the official built-in [lightning:empApi](https://developer.salesforce.com/docs/component-library/bundle/lightning:empApi/documentation) component in Summer '18.
+However, the service is still usefull for specific use cases in which `lightning:empApi` is not supported. These include Communities or Visualforce support.
 
 ## About
 
