@@ -9,7 +9,7 @@ However, the service is still usefull for specific use cases in which `lightning
 This is a generic and reusable Lightning component that allows to publish and subscribe to platform events.
 This is a service component so it has no user interface of it's own: it is meant to be called by other components.
 
-<b>Features</b>
+**Features**
 
 The component provides the following features:
 - subscribe and publish any platform event
@@ -18,6 +18,10 @@ The component provides the following features:
 <div align="center">
     <img src="gfx/sample-app.png" alt="Sample app screenshot"/>
 </div>
+
+**Requirements**
+
+This component requires that you first install the [Server Action Service](https://github.com/pozil/server-action-service).
 
 ## Documentation
 The component is documented using Aura documentation.<br/>
@@ -93,12 +97,6 @@ You then have two complementary ways of interacting with the platform event serv
         </table>
     </li>
 </ul>
-
-## Salesforce DX setup instructions
-Deploy the sample application with Salesforce DX by clicking on this button:
-
-[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com)
-
 
 ## Sample application
 The default installation installs the component and a sample application available under this URL (replace the domain):<br/>
